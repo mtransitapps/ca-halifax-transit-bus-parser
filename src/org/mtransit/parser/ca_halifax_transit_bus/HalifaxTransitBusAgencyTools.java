@@ -666,6 +666,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		}
 		gStopName = CLEAN_BOUNDS.matcher(gStopName).replaceAll(StringUtils.EMPTY);
 		gStopName = CLEAN_STREETS_CROSSING.matcher(gStopName).replaceAll(SLASH);
+		gStopName = MSpec.cleanStreetTypes(gStopName);
 		gStopName = MSpec.cleanNumbers(gStopName);
 		return MSpec.cleanLabel(gStopName);
 	}

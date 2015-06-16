@@ -400,7 +400,10 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				return;
 			}
 		} else if (mRoute.id == 22l) {
-			if (gTrip.direction_id == 1) {
+			if (gTrip.direction_id == 0) {
+				mTrip.setHeadsignString(MUMFORD, gTrip.direction_id);
+				return;
+			} else if (gTrip.direction_id == 1) {
 				mTrip.setHeadsignString(EXHIBITION_PARK, gTrip.direction_id);
 				return;
 			}
@@ -623,23 +626,24 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				return;
 			}
 		}
-		String gTripHeadsignLC = gTrip.trip_headsign.toLowerCase(Locale.ENGLISH);
-		if (gTripHeadsignLC.startsWith(mRoute.shortName)) {
-			gTripHeadsignLC = gTripHeadsignLC.substring(mRoute.shortName.length() + 1);
+		String gTripHeadsign = gTrip.trip_headsign;
+		if (gTripHeadsign.toLowerCase(Locale.ENGLISH).startsWith(mRoute.shortName)) {
+			gTripHeadsign = gTripHeadsign.substring(mRoute.shortName.length() + 1);
 		}
-		int indexOfTO = gTripHeadsignLC.indexOf(TO);
-		if (indexOfTO >= 0) {
-			gTripHeadsignLC = gTripHeadsignLC.substring(indexOfTO + TO.length());
-		}
-		int indexOfVIA = gTripHeadsignLC.indexOf(VIA);
-		if (indexOfVIA >= 0) {
-			gTripHeadsignLC = gTripHeadsignLC.substring(0, indexOfVIA);
-		}
-		mTrip.setHeadsignString(cleanTripHeadsign(gTripHeadsignLC), gTrip.direction_id);
+		mTrip.setHeadsignString(cleanTripHeadsign(gTripHeadsign), gTrip.direction_id);
 	}
 
 	@Override
 	public String cleanTripHeadsign(String tripHeadsign) {
+		tripHeadsign = tripHeadsign.toLowerCase(Locale.ENGLISH);
+		int indexOfTO = tripHeadsign.indexOf(TO);
+		if (indexOfTO >= 0) {
+			tripHeadsign = tripHeadsign.substring(indexOfTO + TO.length());
+		}
+		int indexOfVIA = tripHeadsign.indexOf(VIA);
+		if (indexOfVIA >= 0) {
+			tripHeadsign = tripHeadsign.substring(0, indexOfVIA);
+		}
 		tripHeadsign = MSpec.cleanStreetTypes(tripHeadsign);
 		return MSpec.cleanLabel(tripHeadsign);
 	}

@@ -17,7 +17,7 @@ import org.mtransit.parser.gtfs.data.GTrip;
 import org.mtransit.parser.mt.data.MAgency;
 import org.mtransit.parser.mt.data.MDirectionType;
 import org.mtransit.parser.mt.data.MRoute;
-import org.mtransit.parser.mt.data.MSpec;
+import org.mtransit.parser.CleanUtils;
 import org.mtransit.parser.mt.data.MTrip;
 
 // http://www.halifax.ca/opendata/
@@ -38,11 +38,11 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public void start(String[] args) {
-		System.out.printf("Generating Halifax Transit bus data...\n");
+		System.out.printf("\nGenerating Halifax Transit bus data...\n");
 		long start = System.currentTimeMillis();
 		this.serviceIds = extractUsefulServiceIds(args, this);
 		super.start(args);
-		System.out.printf("Generating Halifax Transit bus data... DONE in %s.\n", Utils.getPrettyDuration(System.currentTimeMillis() - start));
+		System.out.printf("\nGenerating Halifax Transit bus data... DONE in %s.\n", Utils.getPrettyDuration(System.currentTimeMillis() - start));
 	}
 
 	@Override
@@ -644,8 +644,8 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		if (indexOfVIA >= 0) {
 			tripHeadsign = tripHeadsign.substring(0, indexOfVIA);
 		}
-		tripHeadsign = MSpec.cleanStreetTypes(tripHeadsign);
-		return MSpec.cleanLabel(tripHeadsign);
+		tripHeadsign = CleanUtils.cleanStreetTypes(tripHeadsign);
+		return CleanUtils.cleanLabel(tripHeadsign);
 	}
 
 	private static final String SLASH = " / ";
@@ -671,9 +671,9 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		}
 		gStopName = CLEAN_BOUNDS.matcher(gStopName).replaceAll(StringUtils.EMPTY);
 		gStopName = CLEAN_STREETS_CROSSING.matcher(gStopName).replaceAll(SLASH);
-		gStopName = MSpec.cleanStreetTypes(gStopName);
-		gStopName = MSpec.cleanNumbers(gStopName);
-		return MSpec.cleanLabel(gStopName);
+		gStopName = CleanUtils.cleanStreetTypes(gStopName);
+		gStopName = CleanUtils.cleanNumbers(gStopName);
+		return CleanUtils.cleanLabel(gStopName);
 	}
 
 	private static final Pattern DIGITS = Pattern.compile("[\\d]+");

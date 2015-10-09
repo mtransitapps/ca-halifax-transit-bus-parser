@@ -337,37 +337,37 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
-		if (mRoute.id == 1l) {
+		if (mRoute.getId() == 1l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(BRIDGE_TERMINAL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 2l) {
+		} else if (mRoute.getId() == 2l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DOWNTOWN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 4l) {
+		} else if (mRoute.getId() == 4l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DOWNTOWN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 5l) {
+		} else if (mRoute.getId() == 5l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DOWNTOWN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 6l) {
+		} else if (mRoute.getId() == 6l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DOWNTOWN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 9l) {
+		} else if (mRoute.getId() == 9l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(POINT_PLEASANT, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 10l) {
+		} else if (mRoute.getId() == 10l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DALHOUSIE, gTrip.getDirectionId());
 				return;
@@ -375,7 +375,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(WESTPHAL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 14l) {
+		} else if (mRoute.getId() == 14l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DALHOUSIE, gTrip.getDirectionId());
 				return;
@@ -383,32 +383,32 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SCOTIA_SQUARE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 15l) {
+		} else if (mRoute.getId() == 15l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MUMFORD, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 16l) {
+		} else if (mRoute.getId() == 16l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(LACEWOOD, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 18l) {
+		} else if (mRoute.getId() == 18l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(UNIVERSITIES, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 20l) {
+		} else if (mRoute.getId() == 20l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MUMFORD_DOWNTOWN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 21l) {
+		} else if (mRoute.getId() == 21l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(LACEWOOD_HALIFAX, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 22l) {
+		} else if (mRoute.getId() == 22l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MUMFORD, gTrip.getDirectionId());
 				return;
@@ -416,17 +416,17 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(EXHIBITION_PARK, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 23l) {
+		} else if (mRoute.getId() == 23l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MUMFORD_HALIFAX, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 33l) {
+		} else if (mRoute.getId() == 33l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DOWNTOWN, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 42l) {
+		} else if (mRoute.getId() == 42l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(LACEWOOD, gTrip.getDirectionId());
 				return;
@@ -434,12 +434,12 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(DALHOUSIE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 51l) {
+		} else if (mRoute.getId() == 51l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(OCEAN_BREEZE_BURNSIDE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 52l) {
+		} else if (mRoute.getId() == 52l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(LACEWOOD_CHAIN_LAKE_DRIVE, gTrip.getDirectionId());
 				return;
@@ -447,17 +447,17 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(BRIDGE_TERMINAL_BURNSIDE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 53l) {
+		} else if (mRoute.getId() == 53l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BRIDGE_TERMINAL_HALIFAX, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 58l) {
+		} else if (mRoute.getId() == 58l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BRIDGE_TERMINAL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 59l) {
+		} else if (mRoute.getId() == 59l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BRIDGE_TERMINAL_HALIFAX, gTrip.getDirectionId());
 				return;
@@ -465,12 +465,12 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(COLBY_VILLAGE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 60l) {
+		} else if (mRoute.getId() == 60l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(EASTERN_PASSAGE_HERITAGE_HILLS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 61l) {
+		} else if (mRoute.getId() == 61l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BRIDGE_TERMINAL_HALIFAX, gTrip.getDirectionId());
 				return;
@@ -478,42 +478,42 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(FOREST_HILLS_NORTH_PRESTON, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 66l) {
+		} else if (mRoute.getId() == 66l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(HIGHFIELD_COBEQUID, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 68l) {
+		} else if (mRoute.getId() == 68l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(BRIDGE_TERMINAL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 72l) {
+		} else if (mRoute.getId() == 72l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DARTMOUTH_CROSSING, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 78l) {
+		} else if (mRoute.getId() == 78l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(WOODSIDE_FERRY, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 79l) {
+		} else if (mRoute.getId() == 79l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(WOODSIDE_FERRY, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 80l) {
+		} else if (mRoute.getId() == 80l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(HALIFAX, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 82l) {
+		} else if (mRoute.getId() == 82l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(HALIFAX, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 83l) {
+		} else if (mRoute.getId() == 83l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(SACKVILLE_TERMINAL, gTrip.getDirectionId());
 				return;
@@ -521,7 +521,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SPRINGFIELD, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 159l) {
+		} else if (mRoute.getId() == 159l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(HALIFAX, gTrip.getDirectionId());
 				return;
@@ -529,7 +529,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(PORTLAND_HLS, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 185l) {
+		} else if (mRoute.getId() == 185l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(HALIFAX, gTrip.getDirectionId());
 				return;
@@ -537,17 +537,17 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SACKVILLE, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 320l) {
+		} else if (mRoute.getId() == 320l) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(HALIFAX, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == 330l) {
+		} else if (mRoute.getId() == 330l) {
 			if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(TANTALLON, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == RID_CP1) {
+		} else if (mRoute.getId() == RID_CP1) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DUNBRACK_ST_LANGBRAE_DR, gTrip.getDirectionId());
 				return;
@@ -555,7 +555,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(CLAYTON_PARK_JUNIOR_HIGH, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == RID_ECRL) {
+		} else if (mRoute.getId() == RID_ECRL) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(RAGGED_LAKE_TRANSIT_CENTRE, gTrip.getDirectionId());
 				return;
@@ -563,7 +563,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(MUMFORD_TERMINAL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == RID_ECS) {
+		} else if (mRoute.getId() == RID_ECS) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ILSLEY_AVE, gTrip.getDirectionId());
 				return;
@@ -571,7 +571,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(DARTMOUTH_BRIDGE_TERMINAL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == RID_HWST) {
+		} else if (mRoute.getId() == RID_HWST) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MUMFORD_TERMINAL, gTrip.getDirectionId());
 				return;
@@ -579,7 +579,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(HALIFAX_WEST_HIGH_SCHOOL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == RID_MACK) {
+		} else if (mRoute.getId() == RID_MACK) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignDirection(MDirectionType.EAST);
 				return;
@@ -587,7 +587,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignDirection(MDirectionType.WEST);
 				return;
 			}
-		} else if (mRoute.id == RID_SP14) {
+		} else if (mRoute.getId() == RID_SP14) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MUMFORD_TERMINAL, gTrip.getDirectionId());
 				return;
@@ -595,7 +595,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(HERRING_COVE_RD, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == RID_SP53) {
+		} else if (mRoute.getId() == RID_SP53) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(DARTMOUTH_HIGH_SCHOOL, gTrip.getDirectionId());
 				return;
@@ -603,17 +603,17 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(HIGHFIELD_TERMINAL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == RID_SP58) {
+		} else if (mRoute.getId() == RID_SP58) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(PRINCE_ANDREW_HIGH_SCHOOL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == RID_SP65) {
+		} else if (mRoute.getId() == RID_SP65) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(ASTRAL_JUNIOR_HIGH_SCH, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == RID_FV01) {
+		} else if (mRoute.getId() == RID_FV01) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(FAIRVIEW_JUNIOR_HIGH_SCHOOL, gTrip.getDirectionId());
 				return;
@@ -621,12 +621,12 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(PARKLAND_DR, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == RID_SP6) {
+		} else if (mRoute.getId() == RID_SP6) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(CITADEL_HIGH_SCHOOL, gTrip.getDirectionId());
 				return;
 			}
-		} else if (mRoute.id == RID_S14) {
+		} else if (mRoute.getId() == RID_S14) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(MUMFORD_TERMINAL, gTrip.getDirectionId());
 				return;
@@ -636,8 +636,8 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 			}
 		}
 		String gTripHeadsign = gTrip.getTripHeadsign();
-		if (gTripHeadsign.toLowerCase(Locale.ENGLISH).startsWith(mRoute.shortName)) {
-			gTripHeadsign = gTripHeadsign.substring(mRoute.shortName.length() + 1);
+		if (gTripHeadsign.toLowerCase(Locale.ENGLISH).startsWith(mRoute.getShortName())) {
+			gTripHeadsign = gTripHeadsign.substring(mRoute.getShortName().length() + 1);
 		}
 		mTrip.setHeadsignString(cleanTripHeadsign(gTripHeadsign), gTrip.getDirectionId());
 	}

@@ -130,7 +130,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (RTS_SP65.equals(gRoute.getRouteShortName())) {
 			return RID_SP65;
 		}
-		System.out.println("Unexpected route ID " + gRoute);
+		System.out.printf("\nUnexpected route ID for %s!\n", gRoute);
 		System.exit(-1);
 		return -1l;
 	}
@@ -280,7 +280,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		case 402: return COLOR_8B5D3B;
 		// @formatter:on
 		default:
-			System.out.println("Unexpected route color " + gRoute);
+			System.out.printf("\nUnexpected route color for %s!\n", gRoute);
 			System.exit(-1);
 			return null;
 		}
@@ -288,6 +288,10 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 
 	private static final String TO = " to ";
 	private static final String VIA = " via ";
+	private static final String DASH = "-";
+	private static final String SLASH = " / ";
+	private static final String HALIFAX = "Halifax";
+	private static final String TERMINAL = "Terminal";
 
 	private static final String POINT_PLEASANT = "Pt Pleasant";
 	private static final String WESTPHAL = "Westphal";
@@ -296,42 +300,46 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String SCOTIA_SQUARE = "Scotia Sq";
 	private static final String MUMFORD = "Mumford";
 	private static final String UNIVERSITIES = "Universities";
-	private static final String MUMFORD_DOWNTOWN = "Mumford-Downtown";
-	private static final String LACEWOOD_HALIFAX = "Lacewood-Halifax";
-	private static final String MUMFORD_HALIFAX = "Mumford-Halifax";
 	private static final String DOWNTOWN = "Downtown";
-	private static final String OCEAN_BREEZE_BURNSIDE = "Ocean Breeze-Burnside";
-	private static final String LACEWOOD_CHAIN_LAKE_DRIVE = "Lacewood-Chain Lk Dr";
-	private static final String BRIDGE_TERMINAL_BURNSIDE = "Bridge Terminal-Burnside";
+	private static final String MUMFORD_DOWNTOWN = MUMFORD + DASH + DOWNTOWN;
+	private static final String LACEWOOD_HALIFAX = LACEWOOD + DASH + HALIFAX;
+	private static final String MUMFORD_HALIFAX = MUMFORD + DASH + HALIFAX;
+	private static final String BURNSIDE = "Burnside";
+	private static final String OCEAN_BREEZE_BURNSIDE = "Ocean Breeze" + DASH + BURNSIDE;
+	private static final String LACEWOOD_CHAIN_LAKE_DRIVE = LACEWOOD + DASH + "Chain Lk Dr";
+	private static final String BRIDGE_TERMINAL = "Bridge " + TERMINAL;
+	private static final String BRIDGE_TERMINAL_BURNSIDE = BRIDGE_TERMINAL + DASH + BURNSIDE;
 	private static final String COLBY_VILLAGE = "Colby Vlg";
-	private static final String EASTERN_PASSAGE_HERITAGE_HILLS = "Eastern Passage-Heritage Hls";
-	private static final String BRIDGE_TERMINAL_HALIFAX = "Bridge Terminal-Halifax";
-	private static final String FOREST_HILLS_NORTH_PRESTON = "Forest Hills-North Preston";
-	private static final String HIGHFIELD_COBEQUID = "Highfield-Cobequid";
-	private static final String BRIDGE_TERMINAL = "Bridge Terminal";
-	private static final String DARTMOUTH_CROSSING = "Dartmouth Crossing";
+	private static final String EASTERN_PASSAGE_HERITAGE_HILLS = "Eastern Passage" + DASH + "Heritage Hls";
+	private static final String BRIDGE_TERMINAL_HALIFAX = BRIDGE_TERMINAL + DASH + HALIFAX;
+	private static final String FOREST_HILLS_NORTH_PRESTON = "Forest Hls" + DASH + "North Preston";
+	private static final String COBEQUID = "Cobequid";
+	private static final String COBEQUID_TERMINAL = COBEQUID + " " + TERMINAL;
+	private static final String HIGHFIELD = "Highfield";
+	private static final String DARTMOUTH = "Dartmouth";
+	private static final String DARTMOUTH_CROSSING = DARTMOUTH + " Xing";
 	private static final String WOODSIDE_FERRY = "Woodside Ferry";
-	private static final String HALIFAX = "Halifax";
 	private static final String SACKVILLE = "Sackville";
 	private static final String TANTALLON = "Tantallon";
-	private static final String DUNBRACK_ST_LANGBRAE_DR = "Dunbrack St / Langbrae Dr";
+	private static final String DUNBRACK_ST_LANGBRAE_DR = "Dunbrack St" + SLASH + "Langbrae Dr";
 	private static final String CLAYTON_PARK_JUNIOR_HIGH = "Clayton Pk Junior High";
-	private static final String RAGGED_LAKE_TRANSIT_CENTRE = "Ragged Lake Transit Ctr";
+	private static final String RAGGED_LAKE_TRANSIT_CENTRE = "Ragged Lk Transit Ctr";
 	private static final String ILSLEY_AVE = "Ilsley Ave";
-	private static final String DARTMOUTH_BRIDGE_TERMINAL = "Dartmouth Bridge Terminal";
-	private static final String HALIFAX_WEST_HIGH_SCHOOL = "Halifax West High School";
+	private static final String DARTMOUTH_BRIDGE_TERMINAL = DARTMOUTH + " " + BRIDGE_TERMINAL;
+	private static final String HIGH_SCHOOL = "High School";
+	private static final String HALIFAX_WEST_HIGH_SCHOOL = HALIFAX + " West " + HIGH_SCHOOL;
 	private static final String HERRING_COVE_RD = "Herring Cv Rd";
-	private static final String DARTMOUTH_HIGH_SCHOOL = "Dartmouth High School";
-	private static final String HIGHFIELD_TERMINAL = "Highfield Terminal";
-	private static final String FAIRVIEW_JUNIOR_HIGH_SCHOOL = "Fairview Junior High School";
+	private static final String DARTMOUTH_HIGH_SCHOOL = DARTMOUTH + " " + HIGH_SCHOOL;
+	private static final String HIGHFIELD_TERMINAL = HIGHFIELD + " " + TERMINAL;
+	private static final String FAIRVIEW_JUNIOR_HIGH_SCHOOL = "Fairview Junior " + HIGH_SCHOOL;
 	private static final String PARKLAND_DR = "Parkland Dr";
-	private static final String MUMFORD_TERMINAL = "Mumford Terminal";
-	private static final String CUNARD_JUNIOR_HIGH_SCHOOL = "Cunard Junior High School";
+	private static final String MUMFORD_TERMINAL = MUMFORD + " " + TERMINAL;
+	private static final String CUNARD_JUNIOR_HIGH_SCHOOL = "Cunard Junior " + HIGH_SCHOOL;
 	private static final String SPRINGFIELD = "Springfield";
-	private static final String SACKVILLE_TERMINAL = "Sackville Terminal";
-	private static final String CITADEL_HIGH_SCHOOL = "Citadel High School";
-	private static final String ASTRAL_JUNIOR_HIGH_SCH = "Astral Junior High School";
-	private static final String PRINCE_ANDREW_HIGH_SCHOOL = "Prince Andrew High School";
+	private static final String SACKVILLE_TERMINAL = "Sackville " + TERMINAL;
+	private static final String CITADEL_HIGH_SCHOOL = "Citadel " + HIGH_SCHOOL;
+	private static final String ASTRAL_JUNIOR_HIGH_SCH = "Astral Junior " + HIGH_SCHOOL;
+	private static final String PRINCE_ANDREW_HIGH_SCHOOL = "Prince Andrew " + HIGH_SCHOOL;
 	private static final String EXHIBITION_PARK = "Exhibition Pk";
 	private static final String PORTLAND_HLS = "Portland Hls";
 
@@ -363,7 +371,10 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				return;
 			}
 		} else if (mRoute.getId() == 9l) {
-			if (gTrip.getDirectionId() == 1) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignString(MUMFORD_TERMINAL, gTrip.getDirectionId());
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(POINT_PLEASANT, gTrip.getDirectionId());
 				return;
 			}
@@ -394,7 +405,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				return;
 			}
 		} else if (mRoute.getId() == 18l) {
-			if (gTrip.getDirectionId() == 1) {
+			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(UNIVERSITIES, gTrip.getDirectionId());
 				return;
 			}
@@ -479,8 +490,8 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				return;
 			}
 		} else if (mRoute.getId() == 66l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(HIGHFIELD_COBEQUID, gTrip.getDirectionId());
+			if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignString(COBEQUID_TERMINAL, gTrip.getDirectionId());
 				return;
 			}
 		} else if (mRoute.getId() == 68l) {
@@ -656,11 +667,11 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 			tripHeadsign = tripHeadsign.substring(0, indexOfVIA);
 		}
 		tripHeadsign = STARTS_WITH_TO.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
+		tripHeadsign = CleanUtils.SAINT.matcher(tripHeadsign).replaceAll(CleanUtils.SAINT_REPLACEMENT);
 		tripHeadsign = CleanUtils.cleanStreetTypes(tripHeadsign);
 		return CleanUtils.cleanLabel(tripHeadsign);
 	}
 
-	private static final String SLASH = " / ";
 	private static final Pattern CLEAN_STREETS_CROSSING = Pattern.compile("((\\s)*(" //
 			+ "after and opposite|afteropposite|after|" //
 			+ "before and opposite|beforeopposite|before|" //

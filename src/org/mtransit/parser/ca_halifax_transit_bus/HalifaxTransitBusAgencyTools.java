@@ -1,22 +1,31 @@
 package org.mtransit.parser.ca_halifax_transit_bus;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mtransit.parser.DefaultAgencyTools;
+import org.mtransit.parser.Pair;
+import org.mtransit.parser.SplitUtils;
 import org.mtransit.parser.Utils;
+import org.mtransit.parser.SplitUtils.RouteTripSpec;
 import org.mtransit.parser.gtfs.data.GCalendar;
 import org.mtransit.parser.gtfs.data.GCalendarDate;
 import org.mtransit.parser.gtfs.data.GRoute;
 import org.mtransit.parser.gtfs.data.GSpec;
 import org.mtransit.parser.gtfs.data.GStop;
 import org.mtransit.parser.gtfs.data.GTrip;
+import org.mtransit.parser.gtfs.data.GTripStop;
 import org.mtransit.parser.mt.data.MAgency;
 import org.mtransit.parser.mt.data.MDirectionType;
 import org.mtransit.parser.mt.data.MRoute;
+import org.mtransit.parser.mt.data.MTripStop;
 import org.mtransit.parser.CleanUtils;
 import org.mtransit.parser.mt.data.MTrip;
 
@@ -288,6 +297,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 
 	private static final String TO = " to ";
 	private static final String VIA = " via ";
+	private static final String SLASH = " / ";
 	private static final String HALIFAX = "Halifax";
 	private static final String TERMINAL = "Terminal";
 	private static final String POINT_PLEASANT = "Pt Pleasant";
@@ -304,18 +314,30 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String NORTH_PRESTON = "North Preston";
 	private static final String COBEQUID = "Cobequid";
 	private static final String COBEQUID_TERMINAL = COBEQUID + " " + TERMINAL;
+	private static final String HIGHFIELD = "Highfield";
 	private static final String DARTMOUTH = "Dartmouth";
 	private static final String DARTMOUTH_CROSSING = DARTMOUTH + " Xing";
 	private static final String WOODSIDE_FERRY = "Woodside Ferry";
 	private static final String TANTALLON = "Tantallon";
+	private static final String DUNBRACK_ST_LANGBRAE_DR = "Dunbrack St" + SLASH + "Langbrae Dr";
+	private static final String CLAYTON_PARK_JUNIOR_HIGH = "Clayton Pk Junior High";
 	private static final String TRANSIT_CENTRE = "Transit Ctr";
 	private static final String RAGGED_LAKE_TRANSIT_CENTRE = "Ragged Lk " + TRANSIT_CENTRE;
 	private static final String ILSLEY_AVE = "Ilsley Ave";
 	private static final String DARTMOUTH_BRIDGE_TERMINAL = DARTMOUTH + " " + BRIDGE_TERMINAL;
+	private static final String HIGH_SCHOOL = "High School";
+	private static final String HALIFAX_WEST_HIGH_SCHOOL = HALIFAX + " West " + HIGH_SCHOOL;
+	private static final String HERRING_COVE_ROAD = "Herring Cv Rd";
 	private static final String BAYERS = "Bayers";
 	private static final String BAYERS_ROAD = BAYERS + " Rd";
 	private static final String BAYERS_LAKE = BAYERS + " Lk";
+	private static final String DARTMOUTH_HIGH_SCHOOL = DARTMOUTH + " " + HIGH_SCHOOL;
+	private static final String HIGHFIELD_TERMINAL = HIGHFIELD + " " + TERMINAL;
+	private static final String JUNIOR_HIGH_SCHOOL = "Jr High";
+	private static final String FAIRVIEW_JUNIOR_HIGH_SCHOOL = "Fairview " + JUNIOR_HIGH_SCHOOL;
+	private static final String PARKLAND_DR = "Parkland Dr";
 	private static final String MUMFORD_TERMINAL = MUMFORD + " " + TERMINAL;
+	private static final String CUNARD_JUNIOR_HIGH_SCHOOL = "Cunard " + JUNIOR_HIGH_SCHOOL;
 	private static final String SPRINGFIELD = "Springfield";
 	private static final String SACKVILLE_TERMINAL = "Sackville " + TERMINAL;
 	private static final String EXHIBITION_PARK = "Exhibition Pk";
@@ -330,8 +352,49 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String EAST_LC = "east";
 	private static final String WEST_LC = "west";
 
+	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
+	static {
+		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
+		map2.put(RID_S14, new RouteTripSpec(RID_S14, //
+				0, MTrip.HEADSIGN_TYPE_STRING, MUMFORD_TERMINAL, //
+				1, MTrip.HEADSIGN_TYPE_STRING, CUNARD_JUNIOR_HIGH_SCHOOL) //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { "8799", "8370", "7285" })) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { "8643", "7187", "8799" })) //
+				.compileBothTripSort());
+		ALL_ROUTE_TRIPS2 = map2;
+	}
+
+	@Override
+	public int compareEarly(long routeId, List<MTripStop> list1, List<MTripStop> list2, MTripStop ts1, MTripStop ts2, GStop ts1GStop, GStop ts2GStop) {
+		if (ALL_ROUTE_TRIPS2.containsKey(routeId)) {
+			return ALL_ROUTE_TRIPS2.get(routeId).compare(routeId, list1, list2, ts1, ts2, ts1GStop, ts2GStop);
+		}
+		return super.compareEarly(routeId, list1, list2, ts1, ts2, ts1GStop, ts2GStop);
+	}
+
+	@Override
+	public ArrayList<MTrip> splitTrip(MRoute mRoute, GTrip gTrip, GSpec gtfs) {
+		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
+			return ALL_ROUTE_TRIPS2.get(mRoute.getId()).getAllTrips();
+		}
+		return super.splitTrip(mRoute, gTrip, gtfs);
+	}
+
+	@Override
+	public Pair<Long[], Integer[]> splitTripStop(MRoute mRoute, GTrip gTrip, GTripStop gTripStop, ArrayList<MTrip> splitTrips, GSpec routeGTFS) {
+		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
+			return SplitUtils.splitTripStop(mRoute, gTrip, gTripStop, routeGTFS, ALL_ROUTE_TRIPS2.get(mRoute.getId()));
+		}
+		return super.splitTripStop(mRoute, gTrip, gTripStop, splitTrips, routeGTFS);
+	}
+
 	@Override
 	public void setTripHeadsign(MRoute mRoute, MTrip mTrip, GTrip gTrip, GSpec gtfs) {
+		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
+			return; // split
+		}
 		if (EAST_LC.equalsIgnoreCase(gTrip.getTripHeadsign())) {
 			mTrip.setHeadsignDirection(MDirectionType.EAST);
 			return;
@@ -353,6 +416,14 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SPRINGFIELD, gTrip.getDirectionId());
 				return;
 			}
+		} else if (mRoute.getId() == RID_CP1) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignString(DUNBRACK_ST_LANGBRAE_DR, gTrip.getDirectionId());
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignString(CLAYTON_PARK_JUNIOR_HIGH, gTrip.getDirectionId());
+				return;
+			}
 		} else if (mRoute.getId() == RID_ECRL) {
 			if (gTrip.getDirectionId() == 0) {
 				mTrip.setHeadsignString(RAGGED_LAKE_TRANSIT_CENTRE, gTrip.getDirectionId());
@@ -367,6 +438,38 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				return;
 			} else if (gTrip.getDirectionId() == 1) {
 				mTrip.setHeadsignString(DARTMOUTH_BRIDGE_TERMINAL, gTrip.getDirectionId());
+				return;
+			}
+		} else if (mRoute.getId() == RID_HWST) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignString(MUMFORD_TERMINAL, gTrip.getDirectionId());
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignString(HALIFAX_WEST_HIGH_SCHOOL, gTrip.getDirectionId());
+				return;
+			}
+		} else if (mRoute.getId() == RID_SP14) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignString(MUMFORD_TERMINAL, gTrip.getDirectionId());
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignString(HERRING_COVE_ROAD, gTrip.getDirectionId());
+				return;
+			}
+		} else if (mRoute.getId() == RID_SP53) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignString(DARTMOUTH_HIGH_SCHOOL, gTrip.getDirectionId());
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignString(HIGHFIELD_TERMINAL, gTrip.getDirectionId());
+				return;
+			}
+		} else if (mRoute.getId() == RID_FV01) {
+			if (gTrip.getDirectionId() == 0) {
+				mTrip.setHeadsignString(FAIRVIEW_JUNIOR_HIGH_SCHOOL, gTrip.getDirectionId());
+				return;
+			} else if (gTrip.getDirectionId() == 1) {
+				mTrip.setHeadsignString(PARKLAND_DR, gTrip.getDirectionId());
 				return;
 			}
 		}

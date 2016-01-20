@@ -320,7 +320,8 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String WOODSIDE_FERRY = "Woodside Ferry";
 	private static final String TANTALLON = "Tantallon";
 	private static final String DUNBRACK_ST_LANGBRAE_DR = "Dunbrack St" + SLASH + "Langbrae Dr";
-	private static final String CLAYTON_PARK_JUNIOR_HIGH = "Clayton Pk Junior High";
+	private static final String JUNIOR_HIGH_SCHOOL = "Jr High";
+	private static final String CLAYTON_PARK_JUNIOR_HIGH_SCHOOL = "Clayton Pk " + JUNIOR_HIGH_SCHOOL;
 	private static final String TRANSIT_CENTRE = "Transit Ctr";
 	private static final String RAGGED_LAKE_TRANSIT_CENTRE = "Ragged Lk " + TRANSIT_CENTRE;
 	private static final String ILSLEY_AVE = "Ilsley Ave";
@@ -333,7 +334,6 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String BAYERS_LAKE = BAYERS + " Lk";
 	private static final String DARTMOUTH_HIGH_SCHOOL = DARTMOUTH + " " + HIGH_SCHOOL;
 	private static final String HIGHFIELD_TERMINAL = HIGHFIELD + " " + TERMINAL;
-	private static final String JUNIOR_HIGH_SCHOOL = "Jr High";
 	private static final String FAIRVIEW_JUNIOR_HIGH_SCHOOL = "Fairview " + JUNIOR_HIGH_SCHOOL;
 	private static final String PARKLAND_DR = "Parkland Dr";
 	private static final String MUMFORD_TERMINAL = MUMFORD + " " + TERMINAL;
@@ -421,7 +421,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(DUNBRACK_ST_LANGBRAE_DR, gTrip.getDirectionId());
 				return;
 			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CLAYTON_PARK_JUNIOR_HIGH, gTrip.getDirectionId());
+				mTrip.setHeadsignString(CLAYTON_PARK_JUNIOR_HIGH_SCHOOL, gTrip.getDirectionId());
 				return;
 			}
 		} else if (mRoute.getId() == RID_ECRL) {

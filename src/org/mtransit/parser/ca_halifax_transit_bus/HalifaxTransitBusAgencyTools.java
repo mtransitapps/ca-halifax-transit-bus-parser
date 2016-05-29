@@ -701,6 +701,8 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 			+ "opposite and after|opposite and before|" //
 			+ "oppositeafter|oppositebefore|opposite" //
 			+ ")(\\s)*)", Pattern.CASE_INSENSITIVE);
+	private static final Pattern CLEAN_CHEVRONS = Pattern.compile("(([^<]+)(<)([^>]+)(>))", Pattern.CASE_INSENSITIVE);
+	private static final String CLEAN_CHEVRONS_REPLACEMENT = "$2$4";
 	private static final Pattern CLEAN_BOUNDS = Pattern.compile("(\\[[^\\]]*\\])", Pattern.CASE_INSENSITIVE);
 	private static final Pattern CIVIC_ADDRESS_ENDS_WITH = Pattern.compile("((\\s)*(" //
 			+ "after|after and opposite|" //
@@ -720,6 +722,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 			gStopName = CIVIC_ADDRESS_ENDS_WITH.matcher(gStopName).replaceAll(StringUtils.EMPTY);
 		}
 		gStopName = CLEAN_BOUNDS.matcher(gStopName).replaceAll(StringUtils.EMPTY);
+		gStopName = CLEAN_CHEVRONS.matcher(gStopName).replaceAll(CLEAN_CHEVRONS_REPLACEMENT);
 		gStopName = CLEAN_STREETS_CROSSING.matcher(gStopName).replaceAll(SLASH);
 		gStopName = CleanUtils.CLEAN_AND.matcher(gStopName).replaceAll(CleanUtils.CLEAN_AND_REPLACEMENT);
 		gStopName = CleanUtils.CLEAN_AT.matcher(gStopName).replaceAll(CleanUtils.CLEAN_AT_REPLACEMENT);

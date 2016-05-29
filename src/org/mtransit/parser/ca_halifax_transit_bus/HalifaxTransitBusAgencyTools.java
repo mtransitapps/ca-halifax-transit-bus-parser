@@ -361,7 +361,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(0, //
 						Arrays.asList(new String[] { "8799", "8370", "7285" })) //
 				.addTripSort(1, //
-						Arrays.asList(new String[] { "8643", "7187", "8799" })) //
+						Arrays.asList(new String[] { "8640", "7187", "8799" })) //
 				.compileBothTripSort());
 		ALL_ROUTE_TRIPS2 = map2;
 	}

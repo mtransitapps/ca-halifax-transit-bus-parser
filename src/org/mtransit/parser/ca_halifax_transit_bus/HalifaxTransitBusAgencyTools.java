@@ -89,6 +89,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String RTS_FV01 = "fv01";
 	private static final String RTS_HWST = "hwst";
 	private static final String RTS_MACK = "mack";
+	private static final String RTS_MACD = "macd";
 	private static final String RTS_S14 = "s14";
 	private static final String RTS_SP6 = "sp6";
 	private static final String RTS_SP14 = "sp14";
@@ -102,6 +103,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final long RID_HWST = 100004l;
 	private static final long RID_FV01 = 100101l;
 	private static final long RID_MACK = 100005l;
+	private static final long RID_MACD = 100006l;
 	private static final long RID_S14 = 100114l;
 	private static final long RID_SP6 = 100106l;
 	private static final long RID_SP14 = 100014l;
@@ -126,6 +128,8 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 			return RID_HWST;
 		} else if (RTS_MACK.equals(gRoute.getRouteShortName())) {
 			return RID_MACK;
+		} else if (RTS_MACD.equals(gRoute.getRouteShortName())) {
+			return RID_MACD;
 		} else if (RTS_S14.equals(gRoute.getRouteShortName())) {
 			return RID_S14;
 		} else if (RTS_SP6.equals(gRoute.getRouteShortName())) {

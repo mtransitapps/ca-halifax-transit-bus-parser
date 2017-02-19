@@ -307,6 +307,8 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String POINT_PLEASANT = "Pt Pleasant";
 	private static final String WESTPHAL = "Westphal";
 	private static final String DALHOUSIE = "Dalhousie";
+	private static final String LACEWOOD = "Lacewood";
+	private static final String LACEWOOD_TERMINAL = LACEWOOD + " " + TERMINAL;
 	private static final String SCOTIA_SQUARE = "Scotia Sq";
 	private static final String MUMFORD = "Mumford";
 	private static final String DOWNTOWN = "Downtown";
@@ -359,6 +361,20 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
+		map2.put(89L, new RouteTripSpec(89L, //
+				1, MTrip.HEADSIGN_TYPE_STRING, COBEQUID_TERMINAL, // NORTH
+				0, MTrip.HEADSIGN_TYPE_STRING, LACEWOOD_TERMINAL) // SOUTH
+				.addTripSort(1, //
+						Arrays.asList(new String[] { //
+						"9102", // Lacewood Terminal Bay 2
+								"6297", // Cobequid Terminal Bay 1
+						})) //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { //
+						"6297", // Cobequid Terminal Bay 1
+								"9102", // Lacewood Terminal Bay 2
+						})) //
+				.compileBothTripSort());
 		map2.put(RID_S14, new RouteTripSpec(RID_S14, //
 				0, MTrip.HEADSIGN_TYPE_STRING, MUMFORD_TERMINAL, //
 				1, MTrip.HEADSIGN_TYPE_STRING, CUNARD_JUNIOR_HIGH_SCHOOL) //

@@ -303,22 +303,29 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String TO = " to ";
 	private static final String VIA = " via ";
 	private static final String SLASH = " / ";
-	private static final String HALIFAX = "Halifax";
+	private static final String HALIFAX_SHORT = "Hfx";
 	private static final String TERMINAL = "Terminal";
+	private static final String TERMINAL_SHORT = "Term";
 	private static final String POINT_PLEASANT = "Pt Pleasant";
 	private static final String WESTPHAL = "Westphal";
 	private static final String DALHOUSIE = "Dalhousie";
 	private static final String LACEWOOD = "Lacewood";
 	private static final String LACEWOOD_TERMINAL = LACEWOOD + " " + TERMINAL;
+	private static final String LACEWOOD_TERMINAL_SHORT = LACEWOOD + " " + TERMINAL_SHORT;
 	private static final String SCOTIA_SQUARE = "Scotia Sq";
 	private static final String MUMFORD = "Mumford";
 	private static final String DOWNTOWN = "Downtown";
-	private static final String DOWNTOWN_HALIFAX = DOWNTOWN + " " + HALIFAX;
+	private static final String DOWNTOWN_HALIFAX_SHORT = DOWNTOWN + " " + HALIFAX_SHORT;
 	private static final String BURNSIDE = "Burnside";
+	private static final String GARAGE = "Garage";
+	private static final String BURNSIDE_GARAGE = BURNSIDE + " " + GARAGE;
 	private static final String BRIDGE_TERMINAL = "Bridge " + TERMINAL;
+	private static final String BRIDGE_TERMINAL_SHORT = "Bridge " + TERMINAL_SHORT;
 	private static final String COLBY = "Colby";
 	private static final String EASTERN_PASSAGE = "Eastern Passage";
-	private static final String NORTH_PRESTON = "North Preston";
+	private static final String AUBURN = "Auburn";
+	private static final String N_PRESTON = "N Preston";
+	private static final String AUBURN_N_PRESTON = AUBURN + " - " + N_PRESTON;
 	private static final String COBEQUID = "Cobequid";
 	private static final String COBEQUID_TERMINAL = COBEQUID + " " + TERMINAL;
 	private static final String HIGHFIELD = "Highfield";
@@ -326,33 +333,37 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String DARTMOUTH_CROSSING = DARTMOUTH + " Xing";
 	private static final String WOODSIDE_FERRY = "Woodside Ferry";
 	private static final String TANTALLON = "Tantallon";
-	private static final String DUNBRACK_ST_LANGBRAE_DR = "Dunbrack St" + SLASH + "Langbrae Dr";
 	private static final String JUNIOR_HIGH_SCHOOL = "Jr High";
-	private static final String CLAYTON_PARK_JUNIOR_HIGH_SCHOOL = "Clayton Pk " + JUNIOR_HIGH_SCHOOL;
-	private static final String TRANSIT_CENTRE = "Transit Ctr";
-	private static final String RAGGED_LAKE_TRANSIT_CENTRE = "Ragged Lk " + TRANSIT_CENTRE;
-	private static final String ILSLEY_AVE = "Ilsley Ave";
-	private static final String DARTMOUTH_BRIDGE_TERMINAL = DARTMOUTH + " " + BRIDGE_TERMINAL;
-	private static final String HIGH_SCHOOL = "High School";
-	private static final String HALIFAX_WEST_HIGH_SCHOOL = HALIFAX + " West " + HIGH_SCHOOL;
-	private static final String HERRING_COVE_ROAD = "Herring Cv Rd";
+	private static final String RAGGED_LAKE = "Ragged Lk";
+	private static final String ILSLEY = "Ilsley";
 	private static final String BAYERS = "Bayers";
 	private static final String BAYERS_ROAD = BAYERS + " Rd";
 	private static final String BAYERS_LAKE = BAYERS + " Lk";
-	private static final String DARTMOUTH_HIGH_SCHOOL = DARTMOUTH + " " + HIGH_SCHOOL;
 	private static final String HIGHFIELD_TERMINAL = HIGHFIELD + " " + TERMINAL;
-	private static final String FAIRVIEW_JUNIOR_HIGH_SCHOOL = "Fairview " + JUNIOR_HIGH_SCHOOL;
-	private static final String PARKLAND_DR = "Parkland Dr";
 	private static final String MUMFORD_TERMINAL = MUMFORD + " " + TERMINAL;
 	private static final String CUNARD_JUNIOR_HIGH_SCHOOL = "Cunard " + JUNIOR_HIGH_SCHOOL;
-	private static final String SPRINGFIELD = "Springfield";
-	private static final String SACKVILLE_TERMINAL = "Sackville " + TERMINAL;
 	private static final String EXHIBITION_PARK = "Exhibition Pk";
 	private static final String WATER_ST_TERMINAL = "Water St " + TERMINAL;
+	private static final String WATER_ST_TERMINAL_SHORT = "Water St " + TERMINAL_SHORT;
 	private static final String LEIBLIN_PARK = "Leiblin Pk";
 	private static final String SAINT_MARY_S = "St Mary's";
-	private static final String DOCKYARD = "Dockyard";
 	private static final String SUMMER_STREET = "Summer St";
+	private static final String TACOMA_CENTER = "Tacoma Ctr";
+	private static final String MIC_MAC_TERMINAL = "Mic Mac " + TERMINAL;
+	private static final String PENHORN_TERMINAL = "Penhorn " + TERMINAL;
+	private static final String PORTLAND_HILLS_TERMINAL = "Portland Hls " + TERMINAL;
+	private static final String PORTLAND_HILLS_TERMINAL_SHORT = "Portland Hls " + TERMINAL_SHORT;
+	private static final String TOWER_ROAD_LOOP = "Tower Rd Loop";
+	private static final String OCEAN_BREEZE = "Ocean Breeze";
+	private static final String MOUNT_ST_VINCENT = "Mt St Vincent";
+	private static final String UNIVERSITIES = "Universities";
+	private static final String HERITAGE_HILLS = "Heritage Hls";
+	private static final String MONTAGUE_ROAD = "Montague Rd";
+	private static final String SHELDRAKE_LAKE = "Sheldrake Lk";
+	private static final String SUNNYSIDE = "Sunnyside";
+	private static final String COLE_HARBOUR = "Cole Harbour";
+	private static final String MOUNT_EDWARD = "Mt Edward";
+	private static final String BUS_GARAGE = "Bus " + GARAGE;
 
 	private static final String SOUTH_LC = "south";
 	private static final String NORTH_LC = "north";
@@ -429,71 +440,6 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 			mTrip.setHeadsignDirection(MDirectionType.SOUTH);
 			return;
 		}
-		if (mRoute.getId() == 83l) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(SACKVILLE_TERMINAL, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(SPRINGFIELD, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == RID_CP1) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(DUNBRACK_ST_LANGBRAE_DR, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(CLAYTON_PARK_JUNIOR_HIGH_SCHOOL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == RID_ECRL) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(RAGGED_LAKE_TRANSIT_CENTRE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(MUMFORD_TERMINAL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == RID_ECS) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(ILSLEY_AVE, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(DARTMOUTH_BRIDGE_TERMINAL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == RID_HWST) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(MUMFORD_TERMINAL, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(HALIFAX_WEST_HIGH_SCHOOL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == RID_SP14) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(MUMFORD_TERMINAL, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(HERRING_COVE_ROAD, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == RID_SP53) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(DARTMOUTH_HIGH_SCHOOL, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(HIGHFIELD_TERMINAL, gTrip.getDirectionId());
-				return;
-			}
-		} else if (mRoute.getId() == RID_FV01) {
-			if (gTrip.getDirectionId() == 0) {
-				mTrip.setHeadsignString(FAIRVIEW_JUNIOR_HIGH_SCHOOL, gTrip.getDirectionId());
-				return;
-			} else if (gTrip.getDirectionId() == 1) {
-				mTrip.setHeadsignString(PARKLAND_DR, gTrip.getDirectionId());
-				return;
-			}
-		}
 		String gTripHeadsign = gTrip.getTripHeadsign();
 		if (gTripHeadsign.toLowerCase(Locale.ENGLISH).startsWith(mRoute.getShortName())) {
 			gTripHeadsign = gTripHeadsign.substring(mRoute.getShortName().length() + 1);
@@ -504,182 +450,311 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	@Override
 	public boolean mergeHeadsign(MTrip mTrip, MTrip mTripToMerge) {
 		if (mTrip.getRouteId() == 1l) {
-			if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(BRIDGE_TERMINAL, mTrip.getHeadsignId());
+			if (Arrays.asList( //
+					BRIDGE_TERMINAL_SHORT, //
+					SCOTIA_SQUARE //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(BRIDGE_TERMINAL_SHORT, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 2l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					LACEWOOD_TERMINAL, //
+					MUMFORD_TERMINAL, //
+					WATER_ST_TERMINAL //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(WATER_ST_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 4l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					LACEWOOD_TERMINAL, //
+					MUMFORD_TERMINAL, //
+					WATER_ST_TERMINAL //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(WATER_ST_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 5l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(WATER_ST_TERMINAL, mTrip.getHeadsignId());
+			if (Arrays.asList( //
+					MUMFORD_TERMINAL, //
+					WATER_ST_TERMINAL_SHORT //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(WATER_ST_TERMINAL_SHORT, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 6l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(WATER_ST_TERMINAL, mTrip.getHeadsignId());
+			if (Arrays.asList( //
+					MUMFORD_TERMINAL, //
+					WATER_ST_TERMINAL_SHORT //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(WATER_ST_TERMINAL_SHORT, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 9l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					POINT_PLEASANT, //
+					TOWER_ROAD_LOOP //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(POINT_PLEASANT, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 10l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					BRIDGE_TERMINAL, //
+					DALHOUSIE, //
+					TACOMA_CENTER //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(DALHOUSIE, mTrip.getHeadsignId());
 				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
+			} else if (Arrays.asList( //
+					BRIDGE_TERMINAL, //
+					MIC_MAC_TERMINAL, //
+					SCOTIA_SQUARE, //
+					WESTPHAL //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(WESTPHAL, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 14l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					MUMFORD_TERMINAL, //
+					SCOTIA_SQUARE //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(SCOTIA_SQUARE, mTrip.getHeadsignId());
 				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
+			} else if (Arrays.asList( //
+					LEIBLIN_PARK, //
+					MUMFORD_TERMINAL //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(LEIBLIN_PARK, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 15l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					BAYERS_ROAD, //
+					MUMFORD_TERMINAL //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(BAYERS_ROAD, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 18l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					MOUNT_ST_VINCENT, //
+					UNIVERSITIES, //
+					SAINT_MARY_S //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(SAINT_MARY_S, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 20l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(DOCKYARD, mTrip.getHeadsignId());
+			if (Arrays.asList( //
+					DOWNTOWN, //
+					MUMFORD_TERMINAL//
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 21l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					DOWNTOWN, //
+					LACEWOOD_TERMINAL//
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 22l) {
-			if (mTrip.getHeadsignId() == 1) {
+			if (Arrays.asList( //
+					EXHIBITION_PARK, //
+					RAGGED_LAKE//
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(EXHIBITION_PARK, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 23l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					DOWNTOWN, //
+					MUMFORD_TERMINAL//
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 33l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					LACEWOOD_TERMINAL, //
+					SUMMER_STREET//
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(SUMMER_STREET, mTrip.getHeadsignId());
 				return true;
 			}
+		} else if (mTrip.getRouteId() == 41l) {
+			if (Arrays.asList( //
+					BRIDGE_TERMINAL, //
+					SCOTIA_SQUARE //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(BRIDGE_TERMINAL, mTrip.getHeadsignId());
+				return true;
+			}
 		} else if (mTrip.getRouteId() == 51l) {
-			if (mTrip.getHeadsignId() == 1) {
+			if (Arrays.asList( //
+					BURNSIDE, //
+					OCEAN_BREEZE //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(BURNSIDE, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 52l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					BURNSIDE, //
+					BURNSIDE_GARAGE, //
+					ILSLEY, //
+					LACEWOOD_TERMINAL_SHORT, //
+					SCOTIA_SQUARE //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(BURNSIDE, mTrip.getHeadsignId());
 				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
+			} else if (Arrays.asList( //
+					BAYERS_LAKE, //
+					BRIDGE_TERMINAL //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(BAYERS_LAKE, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 53l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					BRIDGE_TERMINAL, //
+					SUMMER_STREET //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(SUMMER_STREET, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 58l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					BRIDGE_TERMINAL, //
+					PENHORN_TERMINAL //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(BRIDGE_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 59l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					BRIDGE_TERMINAL, //
+					SUMMER_STREET, //
+					PORTLAND_HILLS_TERMINAL, //
+					PENHORN_TERMINAL //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(BRIDGE_TERMINAL, mTrip.getHeadsignId());
 				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
+			} else if (Arrays.asList( //
+					COLBY, //
+					PORTLAND_HILLS_TERMINAL //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(COLBY, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 60l) {
-			if (mTrip.getHeadsignId() == 1) {
+			if (Arrays.asList( //
+					EASTERN_PASSAGE, //
+					HERITAGE_HILLS //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(EASTERN_PASSAGE, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 61l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					BRIDGE_TERMINAL, //
+					PORTLAND_HILLS_TERMINAL_SHORT, //
+					SCOTIA_SQUARE, //
+					MONTAGUE_ROAD //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(SCOTIA_SQUARE, mTrip.getHeadsignId());
 				return true;
-			} else if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(NORTH_PRESTON, mTrip.getHeadsignId());
+			} else if (Arrays.asList( //
+					AUBURN, //
+					AUBURN_N_PRESTON, //
+					N_PRESTON //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(N_PRESTON, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 66l) {
-			if (mTrip.getHeadsignId() == 1) {
+			if (Arrays.asList( //
+					COBEQUID_TERMINAL, //
+					HIGHFIELD_TERMINAL, //
+					PENHORN_TERMINAL //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(COBEQUID_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 68l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					BRIDGE_TERMINAL, //
+					SUMMER_STREET //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(BRIDGE_TERMINAL, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 72l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					BUS_GARAGE, //
+					DARTMOUTH_CROSSING //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(DARTMOUTH_CROSSING, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 78l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					MOUNT_EDWARD, //
+					WOODSIDE_FERRY //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(WOODSIDE_FERRY, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 79l) {
-			if (mTrip.getHeadsignId() == 0) {
+			if (Arrays.asList( //
+					COLE_HARBOUR, //
+					WOODSIDE_FERRY //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(WOODSIDE_FERRY, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 80l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(DOWNTOWN_HALIFAX, mTrip.getHeadsignId());
+			if (Arrays.asList( //
+					COBEQUID_TERMINAL, //
+					DOWNTOWN, //
+					SUNNYSIDE //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 82l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(WATER_ST_TERMINAL, mTrip.getHeadsignId());
-				return true;
-			}
-		} else if (mTrip.getRouteId() == 185l) {
-			if (mTrip.getHeadsignId() == 1) {
-				mTrip.setHeadsignString(SACKVILLE_TERMINAL, mTrip.getHeadsignId());
+			if (Arrays.asList( //
+					COBEQUID_TERMINAL, //
+					WATER_ST_TERMINAL_SHORT //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(WATER_ST_TERMINAL_SHORT, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 320l) {
-			if (mTrip.getHeadsignId() == 0) {
-				mTrip.setHeadsignString(DOWNTOWN_HALIFAX, mTrip.getHeadsignId());
+			if (Arrays.asList( //
+					BRIDGE_TERMINAL, //
+					DOWNTOWN_HALIFAX_SHORT //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(DOWNTOWN_HALIFAX_SHORT, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 330l) {
-			if (mTrip.getHeadsignId() == 1) {
+			if (Arrays.asList( //
+					SHELDRAKE_LAKE, //
+					TANTALLON //
+					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(TANTALLON, mTrip.getHeadsignId());
 				return true;
 			}
 		}
-		return super.mergeHeadsign(mTrip, mTripToMerge);
+		System.out.printf("\n%s: Unexpected trips to merge: %s & %s!\n", mTrip.getRouteId(), mTrip, mTripToMerge);
+		System.exit(-1);
+		return false;
 	}
 
 	private static final Pattern STARTS_WITH_TO = Pattern.compile("(^|\\s){1}(to)($|\\s){1}", Pattern.CASE_INSENSITIVE);
@@ -733,6 +808,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 			+ ")(\\s)*$)", Pattern.CASE_INSENSITIVE);
 	private static final String STREET_NUMBER_SEPARATOR = ", ";
 	private static final String CIVIC_ADDRESS = "civic address ";
+	private static final Pattern ENDS_WITH_NUMBER = Pattern.compile("([ ]*\\([\\d]+\\)$)", Pattern.CASE_INSENSITIVE);
 
 	@Override
 	public String cleanStopName(String gStopName) {
@@ -745,6 +821,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		gStopName = CLEAN_BOUNDS.matcher(gStopName).replaceAll(StringUtils.EMPTY);
 		gStopName = CLEAN_CHEVRONS.matcher(gStopName).replaceAll(CLEAN_CHEVRONS_REPLACEMENT);
 		gStopName = CLEAN_STREETS_CROSSING.matcher(gStopName).replaceAll(SLASH);
+		gStopName = ENDS_WITH_NUMBER.matcher(gStopName).replaceAll(StringUtils.EMPTY);
 		gStopName = CleanUtils.CLEAN_AND.matcher(gStopName).replaceAll(CleanUtils.CLEAN_AND_REPLACEMENT);
 		gStopName = CleanUtils.CLEAN_AT.matcher(gStopName).replaceAll(CleanUtils.CLEAN_AT_REPLACEMENT);
 		gStopName = CleanUtils.cleanStreetTypes(gStopName);
@@ -762,11 +839,10 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		Matcher matcher = DIGITS.matcher(gStop.getStopId());
 		if (matcher.find()) {
 			return Integer.parseInt(matcher.group());
-		} else {
-			System.out.printf("\nUnexpected stop ID for %s!\n", gStop);
-			System.exit(-1);
-			return -1;
 		}
+		System.out.printf("\nUnexpected stop ID for %s!\n", gStop);
+		System.exit(-1);
+		return -1;
 	}
 
 	@Override

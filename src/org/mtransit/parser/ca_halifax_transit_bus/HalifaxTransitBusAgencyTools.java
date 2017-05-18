@@ -379,11 +379,11 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(1, //
 						Arrays.asList(new String[] { //
 						"9102", // Lacewood Terminal Bay 2
-								"6297", // Cobequid Terminal Bay 1
+								"6297", "6297_merged_16035756", // Cobequid Terminal Bay 1
 						})) //
 				.addTripSort(0, //
 						Arrays.asList(new String[] { //
-						"6297", // Cobequid Terminal Bay 1
+						"6297", "6297_merged_16035756", // Cobequid Terminal Bay 1
 								"9102", // Lacewood Terminal Bay 2
 						})) //
 				.compileBothTripSort());

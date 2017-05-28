@@ -350,6 +350,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String SUMMER_STREET = "Summer St";
 	private static final String TACOMA_CENTER = "Tacoma Ctr";
 	private static final String MIC_MAC_TERMINAL = "Mic Mac " + TERMINAL;
+	private static final String MICMAC_TERMINAL = "Micmac " + TERMINAL;
 	private static final String PENHORN_TERMINAL = "Penhorn " + TERMINAL;
 	private static final String PORTLAND_HILLS_TERMINAL = "Portland Hls " + TERMINAL;
 	private static final String PORTLAND_HILLS_TERMINAL_SHORT = "Portland Hls " + TERMINAL_SHORT;
@@ -509,6 +510,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				return true;
 			} else if (Arrays.asList( //
 					BRIDGE_TERMINAL, //
+					MICMAC_TERMINAL, //
 					MIC_MAC_TERMINAL, //
 					SCOTIA_SQUARE, //
 					WESTPHAL //
@@ -579,7 +581,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 33l) {
+		} else if (mTrip.getRouteId() == 33L) {
 			if (Arrays.asList( //
 					LACEWOOD_TERMINAL, //
 					SUMMER_STREET//
@@ -746,9 +748,18 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (mTrip.getRouteId() == 330l) {
 			if (Arrays.asList( //
 					SHELDRAKE_LAKE, //
+					SHELDRAKE_LAKE + AND + TANTALLON, //
 					TANTALLON //
 					).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString(TANTALLON, mTrip.getHeadsignId());
+				mTrip.setHeadsignString(SHELDRAKE_LAKE + AND + TANTALLON, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 370L) {
+			if (Arrays.asList( //
+					MICMAC_TERMINAL, //
+					DOWNTOWN_HALIFAX_SHORT //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(DOWNTOWN_HALIFAX_SHORT, mTrip.getHeadsignId());
 				return true;
 			}
 		}

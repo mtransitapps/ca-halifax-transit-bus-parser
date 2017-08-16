@@ -286,6 +286,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		case 90: return COLOR_25AAE1;
 		case 159: return DEFAULT_ROUTE_COLOR;
 		case 185: return DEFAULT_ROUTE_COLOR;
+		case 194: return "50ADE5";
 		case 320: return DEFAULT_ROUTE_COLOR;
 		case 330: return DEFAULT_ROUTE_COLOR;
 		case 370: return DEFAULT_ROUTE_COLOR;
@@ -365,6 +366,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String COLE_HARBOUR = "Cole Harbour";
 	private static final String MOUNT_EDWARD = "Mt Edward";
 	private static final String BUS_GARAGE = "Bus " + GARAGE;
+	private static final String DENTITH = "Dentith";
 
 	private static final String SOUTH_LC = "south";
 	private static final String NORTH_LC = "north";
@@ -518,7 +520,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(WESTPHAL, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 14l) {
+		} else if (mTrip.getRouteId() == 14L) {
 			if (Arrays.asList( //
 					MUMFORD_TERMINAL, //
 					SCOTIA_SQUARE //
@@ -526,6 +528,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(SCOTIA_SQUARE, mTrip.getHeadsignId());
 				return true;
 			} else if (Arrays.asList( //
+					DENTITH, //
 					LEIBLIN_PARK, //
 					MUMFORD_TERMINAL //
 					).containsAll(headsignsValues)) {
@@ -862,7 +865,11 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 			return gStop.getStopId(); // using stop ID as stop code ("GoTime" number)
 		}
 		Matcher matcher = DIGITS.matcher(gStop.getStopId());
-		matcher.find();
-		return matcher.group();
+		if (matcher.find()) {
+			return matcher.group();
+		}
+		System.out.printf("\nUnexpected stop code for %s!\n", gStop);
+		System.exit(-1);
+		return null;
 	}
 }

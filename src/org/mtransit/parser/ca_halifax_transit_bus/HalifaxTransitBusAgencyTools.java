@@ -144,6 +144,19 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		} else if (RTS_SP65.equals(gRoute.getRouteShortName())) {
 			return RID_SP65;
 		}
+		Matcher matcher = DIGITS.matcher(gRoute.getRouteShortName());
+		if (matcher.find()) {
+			int digits = Integer.parseInt(matcher.group());
+			String rsn = gRoute.getRouteShortName().toLowerCase(Locale.ENGLISH);
+			if (rsn.endsWith("a")) {
+				return digits + 1_000_000L;
+			} else if (rsn.endsWith("b")) {
+				return digits + 2_000_000L;
+			}
+			System.out.printf("\nUnexptected route ID for %s!\n", gRoute);
+			System.exit(-1);
+			return -1l;
+		}
 		System.out.printf("\nUnexpected route ID for %s!\n", gRoute);
 		System.exit(-1);
 		return -1l;
@@ -295,6 +308,9 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		case 402: return COLOR_8B5D3B;
 		// @formatter:on
 		default:
+			if (isGoodEnoughAccepted()) {
+				return null;
+			}
 			System.out.printf("\nUnexpected route color for %s!\n", gRoute);
 			System.exit(-1);
 			return null;
@@ -826,6 +842,9 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String cleanStopName(String gStopName) {
+		if (Utils.isUppercaseOnly(gStopName, true, true)) {
+			gStopName = gStopName.toLowerCase(Locale.ENGLISH);
+		}
 		int indexOfCivicAddress = gStopName.toLowerCase(Locale.ENGLISH).indexOf(CIVIC_ADDRESS);
 		if (indexOfCivicAddress >= 0) {
 			gStopName = gStopName.substring(indexOfCivicAddress + CIVIC_ADDRESS.length()) + STREET_NUMBER_SEPARATOR

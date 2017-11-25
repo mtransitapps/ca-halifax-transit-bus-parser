@@ -468,6 +468,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public boolean mergeHeadsign(MTrip mTrip, MTrip mTripToMerge) {
+		List<String> headsignsValues = Arrays.asList(mTrip.getHeadsignValue(), mTripToMerge.getHeadsignValue());
 		if (mTrip.getRouteId() == 1l) {
 			if (Arrays.asList( //
 					BRIDGE_TERMINAL_SHORT, //
@@ -516,6 +517,23 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 					TOWER_ROAD_LOOP //
 					).containsAll(headsignsValues)) {
 				mTrip.setHeadsignString(POINT_PLEASANT, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 9l + 1_000_000L) { // 9A
+			if (Arrays.asList( //
+					MUMFORD_TERMINAL, //
+					DOWNTOWN //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
+				return true;
+			}
+		} else if (mTrip.getRouteId() == 9l + 2_000_000L) { // 9B
+			if (Arrays.asList( //
+					"Fotherby", //
+					MUMFORD_TERMINAL, //
+					DOWNTOWN //
+					).containsAll(headsignsValues)) {
+				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 10l) {
@@ -787,6 +805,8 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		return false;
 	}
 
+	private static final Pattern STARTS_WITH_RSN = Pattern.compile("(^){1}(\\d+)(\\w?)(\\s){1}", Pattern.CASE_INSENSITIVE);
+
 	private static final Pattern STARTS_WITH_TO = Pattern.compile("(^|\\s){1}(to)($|\\s){1}", Pattern.CASE_INSENSITIVE);
 
 	private static final Pattern ENDS_WITH_ONLY = Pattern.compile("([\\s]*only[\\s]*$)", Pattern.CASE_INSENSITIVE);
@@ -800,7 +820,9 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public String cleanTripHeadsign(String tripHeadsign) {
-		tripHeadsign = tripHeadsign.toLowerCase(Locale.ENGLISH);
+		if (Utils.isUppercaseOnly(tripHeadsign, true, true)) {
+			tripHeadsign = tripHeadsign.toLowerCase(Locale.ENGLISH);
+		}
 		int indexOfTO = tripHeadsign.indexOf(TO);
 		if (indexOfTO >= 0) {
 			tripHeadsign = tripHeadsign.substring(indexOfTO + TO.length());
@@ -809,6 +831,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		if (indexOfVIA >= 0) {
 			tripHeadsign = tripHeadsign.substring(0, indexOfVIA);
 		}
+		tripHeadsign = STARTS_WITH_RSN.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = STARTS_WITH_TO.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = ENDS_WITH_ONLY.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = METROLINK.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);

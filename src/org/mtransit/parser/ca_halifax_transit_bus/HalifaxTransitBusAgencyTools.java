@@ -398,11 +398,11 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(1, //
 						Arrays.asList(new String[] { //
 						"9102", // Lacewood Terminal Bay 2
-								"6297", "6297_merged_16035756", // Cobequid Terminal Bay 1
+								"6297", // Cobequid Terminal Bay 1
 						})) //
 				.addTripSort(0, //
 						Arrays.asList(new String[] { //
-						"6297", "6297_merged_16035756", // Cobequid Terminal Bay 1
+						"6297", // Cobequid Terminal Bay 1
 								"9102", // Lacewood Terminal Bay 2
 						})) //
 				.compileBothTripSort());
@@ -418,9 +418,15 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
+	public String cleanStopOriginalId(String gStopId) {
+		gStopId = CleanUtils.cleanMergedID(gStopId);
+		return gStopId;
+	}
+
+	@Override
 	public int compareEarly(long routeId, List<MTripStop> list1, List<MTripStop> list2, MTripStop ts1, MTripStop ts2, GStop ts1GStop, GStop ts2GStop) {
 		if (ALL_ROUTE_TRIPS2.containsKey(routeId)) {
-			return ALL_ROUTE_TRIPS2.get(routeId).compare(routeId, list1, list2, ts1, ts2, ts1GStop, ts2GStop);
+			return ALL_ROUTE_TRIPS2.get(routeId).compare(routeId, list1, list2, ts1, ts2, ts1GStop, ts2GStop, this);
 		}
 		return super.compareEarly(routeId, list1, list2, ts1, ts2, ts1GStop, ts2GStop);
 	}
@@ -436,7 +442,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	@Override
 	public Pair<Long[], Integer[]> splitTripStop(MRoute mRoute, GTrip gTrip, GTripStop gTripStop, ArrayList<MTrip> splitTrips, GSpec routeGTFS) {
 		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
-			return SplitUtils.splitTripStop(mRoute, gTrip, gTripStop, routeGTFS, ALL_ROUTE_TRIPS2.get(mRoute.getId()));
+			return SplitUtils.splitTripStop(mRoute, gTrip, gTripStop, routeGTFS, ALL_ROUTE_TRIPS2.get(mRoute.getId()), this);
 		}
 		return super.splitTripStop(mRoute, gTrip, gTripStop, splitTrips, routeGTFS);
 	}
@@ -511,7 +517,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(WATER_ST_TERMINAL_SHORT, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 9l) {
+		} else if (mTrip.getRouteId() == 9L) {
 			if (Arrays.asList( //
 					POINT_PLEASANT, //
 					TOWER_ROAD_LOOP //
@@ -519,7 +525,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(POINT_PLEASANT, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 9l + 1_000_000L) { // 9A
+		} else if (mTrip.getRouteId() == 9L + 1_000_000L) { // 9A
 			if (Arrays.asList( //
 					MUMFORD_TERMINAL, //
 					DOWNTOWN //
@@ -527,9 +533,10 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 9l + 2_000_000L) { // 9B
+		} else if (mTrip.getRouteId() == 9L + 2_000_000L) { // 9B
 			if (Arrays.asList( //
 					"Fotherby", //
+					"Dentith", //
 					MUMFORD_TERMINAL, //
 					DOWNTOWN //
 					).containsAll(headsignsValues)) {

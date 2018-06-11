@@ -320,6 +320,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String TO = " to ";
 	private static final String VIA = " via ";
 	private static final String SLASH = " / ";
+	private static final String AND = " & ";
 	private static final String HALIFAX_SHORT = "Hfx";
 	private static final String TERMINAL = "Terminal";
 	private static final String TERMINAL_SHORT = "Term";

@@ -389,6 +389,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String MOUNT_EDWARD = "Mt Edward";
 	private static final String BUS_GARAGE = "Bus " + GARAGE;
 	private static final String DENTITH = "Dentith";
+	private static final String TIMBERLEA = "Timberlea";
 
 	private static final String SOUTH_LC = "south";
 	private static final String NORTH_LC = "north";
@@ -607,12 +608,12 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
 				return true;
 			}
-		} else if (mTrip.getRouteId() == 21l) {
+		} else if (mTrip.getRouteId() == 21L) {
 			if (Arrays.asList( //
-					DOWNTOWN, //
-					LACEWOOD_TERMINAL//
+					LACEWOOD_TERMINAL, // ==
+					TIMBERLEA //
 					).containsAll(headsignsValues)) {
-				mTrip.setHeadsignString(DOWNTOWN, mTrip.getHeadsignId());
+				mTrip.setHeadsignString(TIMBERLEA, mTrip.getHeadsignId());
 				return true;
 			}
 		} else if (mTrip.getRouteId() == 22l) {

@@ -327,13 +327,12 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String SLASH = " / ";
 	private static final String AND = " & ";
 	private static final String HALIFAX_SHORT = "Hfx";
-	private static final String TERMINAL = "Terminal";
 	private static final String TERMINAL_SHORT = "Term";
 	private static final String POINT_PLEASANT = "Pt Pleasant";
 	private static final String WESTPHAL = "Westphal";
 	private static final String DALHOUSIE = "Dalhousie";
 	private static final String LACEWOOD = "Lacewood";
-	private static final String LACEWOOD_TERMINAL = LACEWOOD + " " + TERMINAL;
+	private static final String LACEWOOD_TERMINAL = LACEWOOD + " " + TERMINAL_SHORT;
 	private static final String LACEWOOD_TERMINAL_SHORT = LACEWOOD + " " + TERMINAL_SHORT;
 	private static final String SCOTIA_SQUARE = "Scotia Sq";
 	private static final String MUMFORD = "Mumford";
@@ -342,7 +341,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String BURNSIDE = "Burnside";
 	private static final String GARAGE = "Garage";
 	private static final String BURNSIDE_GARAGE = BURNSIDE + " " + GARAGE;
-	private static final String BRIDGE_TERMINAL = "Bridge " + TERMINAL;
+	private static final String BRIDGE_TERMINAL = "Bridge " + TERMINAL_SHORT;
 	private static final String BRIDGE_TERMINAL_SHORT = "Bridge " + TERMINAL_SHORT;
 	private static final String COLBY = "Colby";
 	private static final String EASTERN_PASSAGE = "Eastern Passage";
@@ -350,7 +349,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String N_PRESTON = "N Preston";
 	private static final String AUBURN_N_PRESTON = AUBURN + " - " + N_PRESTON;
 	private static final String COBEQUID = "Cobequid";
-	private static final String COBEQUID_TERMINAL = COBEQUID + " " + TERMINAL;
+	private static final String COBEQUID_TERMINAL = COBEQUID + " " + TERMINAL_SHORT;
 	private static final String HIGHFIELD = "Highfield";
 	private static final String DARTMOUTH = "Dartmouth";
 	private static final String DARTMOUTH_CROSSING = DARTMOUTH + " Xing";
@@ -362,20 +361,20 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String BAYERS = "Bayers";
 	private static final String BAYERS_ROAD = BAYERS + " Rd";
 	private static final String BAYERS_LAKE = BAYERS + " Lk";
-	private static final String HIGHFIELD_TERMINAL = HIGHFIELD + " " + TERMINAL;
-	private static final String MUMFORD_TERMINAL = MUMFORD + " " + TERMINAL;
+	private static final String HIGHFIELD_TERMINAL = HIGHFIELD + " " + TERMINAL_SHORT;
+	private static final String MUMFORD_TERMINAL = MUMFORD + " " + TERMINAL_SHORT;
 	private static final String CUNARD_JUNIOR_HIGH_SCHOOL = "Cunard " + JUNIOR_HIGH_SCHOOL;
 	private static final String EXHIBITION_PARK = "Exhibition Pk";
-	private static final String WATER_ST_TERMINAL = "Water St " + TERMINAL;
+	private static final String WATER_ST_TERMINAL = "Water St " + TERMINAL_SHORT;
 	private static final String WATER_ST_TERMINAL_SHORT = "Water St " + TERMINAL_SHORT;
 	private static final String LEIBLIN_PARK = "Leiblin Pk";
 	private static final String SAINT_MARY_S = "St Mary's";
 	private static final String SUMMER_STREET = "Summer St";
 	private static final String TACOMA_CENTER = "Tacoma Ctr";
-	private static final String MIC_MAC_TERMINAL = "Mic Mac " + TERMINAL;
-	private static final String MICMAC_TERMINAL = "Micmac " + TERMINAL;
-	private static final String PENHORN_TERMINAL = "Penhorn " + TERMINAL;
-	private static final String PORTLAND_HILLS_TERMINAL = "Portland Hls " + TERMINAL;
+	private static final String MIC_MAC_TERMINAL = "Mic Mac " + TERMINAL_SHORT;
+	private static final String MICMAC_TERMINAL = "Micmac " + TERMINAL_SHORT;
+	private static final String PENHORN_TERMINAL = "Penhorn " + TERMINAL_SHORT;
+	private static final String PORTLAND_HILLS_TERMINAL = "Portland Hls " + TERMINAL_SHORT;
 	private static final String PORTLAND_HILLS_TERMINAL_SHORT = "Portland Hls " + TERMINAL_SHORT;
 	private static final String TOWER_ROAD_LOOP = "Tower Rd Loop";
 	private static final String OCEAN_BREEZE = "Ocean Breeze";
@@ -829,8 +828,11 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 
 	private static final Pattern EXPRESS = Pattern.compile("((^|\\W){1}(express)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
 
-	private static final Pattern CLEAN_WATER_ST_TERMINAL = Pattern.compile("((^|\\W){1}(water st[.]?[\\s]*terminal)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
-	private static final String CLEAN_WATER_ST_TERMINAL_REPLACEMENT = "$2" + WATER_ST_TERMINAL + "$4";
+	private static final Pattern TERMINAL_ = Pattern.compile("((^|\\W){1}(terminal)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
+	private static final String TERMINAL_REPLACEMENT = "$2" + TERMINAL_SHORT + "$4";
+
+	private static final Pattern WATER_ST_TERMINAL_ = Pattern.compile("((^|\\W){1}(water st[.]?[\\s]*term)(\\W|$){1})", Pattern.CASE_INSENSITIVE);
+	private static final String WATER_ST_TERMINAL_REPLACEMENT = "$2" + WATER_ST_TERMINAL + "$4";
 
 	@Override
 	public String cleanTripHeadsign(String tripHeadsign) {
@@ -850,8 +852,10 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		tripHeadsign = ENDS_WITH_ONLY.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = METROLINK.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = EXPRESS.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
-		tripHeadsign = CLEAN_WATER_ST_TERMINAL.matcher(tripHeadsign).replaceAll(CLEAN_WATER_ST_TERMINAL_REPLACEMENT);
+		tripHeadsign = TERMINAL_.matcher(tripHeadsign).replaceAll(TERMINAL_REPLACEMENT);
+		tripHeadsign = WATER_ST_TERMINAL_.matcher(tripHeadsign).replaceAll(WATER_ST_TERMINAL_REPLACEMENT);
 		tripHeadsign = CleanUtils.SAINT.matcher(tripHeadsign).replaceAll(CleanUtils.SAINT_REPLACEMENT);
+		tripHeadsign = CleanUtils.CLEAN_AND.matcher(tripHeadsign).replaceAll(CleanUtils.CLEAN_AND_REPLACEMENT);
 		tripHeadsign = CleanUtils.removePoints(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanStreetTypes(tripHeadsign);
 		return CleanUtils.cleanLabel(tripHeadsign);

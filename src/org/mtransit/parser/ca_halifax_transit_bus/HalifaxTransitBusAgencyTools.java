@@ -398,6 +398,22 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
+		map2.put(87L, new RouteTripSpec(87L, //
+				1, MTrip.HEADSIGN_TYPE_STRING, "Bridge Term", // SOUTH
+				0, MTrip.HEADSIGN_TYPE_STRING, "Sackville Term") // NORTH
+				.addTripSort(1, //
+						Arrays.asList(new String[] { //
+						"8967", // Sackville Terminal Bay 2
+								"6297", // <> Cobequid Terminal Bay 1
+								"7615", // Bridge Terminal Bay 15
+						})) //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { //
+						"7615", // Bridge Terminal Bay 15
+								"6297", // <> Cobequid Terminal Bay 1
+								"8967", // Sackville Terminal Bay 2
+						})) //
+				.compileBothTripSort());
 		map2.put(89L, new RouteTripSpec(89L, //
 				1, MTrip.HEADSIGN_TYPE_STRING, COBEQUID_TERMINAL, // NORTH
 				0, MTrip.HEADSIGN_TYPE_STRING, LACEWOOD_TERMINAL) // SOUTH

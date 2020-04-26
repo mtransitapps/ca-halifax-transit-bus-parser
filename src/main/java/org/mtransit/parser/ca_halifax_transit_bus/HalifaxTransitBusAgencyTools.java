@@ -51,7 +51,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	public void start(String[] args) {
 		MTLog.log("Generating Halifax Transit bus data...");
 		long start = System.currentTimeMillis();
-		this.serviceIds = extractUsefulServiceIds(args, this);
+		this.serviceIds = extractUsefulServiceIds(args, this, true);
 		super.start(args);
 		MTLog.log("Generating Halifax Transit bus data... DONE in %s.", Utils.getPrettyDuration(System.currentTimeMillis() - start));
 	}
@@ -379,6 +379,41 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	static {
 		//noinspection UnnecessaryLocalVariable
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<>();
+		map2.put(RID_ECRL, new RouteTripSpec(RID_ECRL, // BECAUSE same head-sign in both direction
+				0, MTrip.HEADSIGN_TYPE_STRING, "Grassy Lk", //
+				1, MTrip.HEADSIGN_TYPE_STRING, MUMFORD) //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { //
+							"8640", // Mumford Terminal Bay 2
+							"9051" // Grassy Lake Dr Oppo TC
+						})) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { //
+							"9051", // Grassy Lake Dr Oppo TC
+							"8640" // Mumford Terminal Bay 2 (8640)
+						})) //
+				.compileBothTripSort());
+		map2.put(RID_ECS, new RouteTripSpec(RID_ECS, // BECAUSE same head-sign in both direction
+				0, MTrip.HEADSIGN_TYPE_STRING, ILSLEY, //
+				1, MTrip.HEADSIGN_TYPE_STRING, BRIDGE_TERMINAL) //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { //
+							"6581", // <> Duffus St After Isleville St
+							"7604", // <> Bridge Terminal Bay 4
+							"8616", // !=
+							"8426", // !=
+							"6949" // <> Ilsley Ave (Opp Halifax Transit)
+						})) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { //
+							"7205", // Ilsley Ave At Halifax Transit
+							"6949", // <> Ilsley Ave (Opp Halifax Transit)
+							"6959", // !=
+							"8241", // !=
+							"6581", // <> Duffus St After Isleville St
+							"7604", // <> Bridge Terminal Bay 4
+						})) //
+				.compileBothTripSort());
 		ALL_ROUTE_TRIPS2 = map2;
 	}
 

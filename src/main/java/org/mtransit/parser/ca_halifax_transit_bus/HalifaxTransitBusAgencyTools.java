@@ -295,11 +295,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		case 433: return null; // TODO
 		// @formatter:on
 		default:
-			if (isGoodEnoughAccepted()) {
-				return null;
-			}
-			MTLog.logFatal("Unexpected route color for %s!", gRoute);
-			return null;
+			throw new MTLog.Fatal("Unexpected route color for %s!", gRoute);
 		}
 	}
 
@@ -377,7 +373,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	private static final String EAST_LC = "east";
 	private static final String WEST_LC = "west";
 
-	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
+	private static final HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<>();
@@ -853,8 +849,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 				return true;
 			}
 		}
-		MTLog.logFatal("%s: Unexpected trips to merge: %s & %s!", mTrip.getRouteId(), mTrip, mTripToMerge);
-		return false;
+		throw new MTLog.Fatal("%s: Unexpected trips to merge: %s & %s!", mTrip.getRouteId(), mTrip, mTripToMerge);
 	}
 
 	private static final Pattern STARTS_WITH_RSN = Pattern.compile("(^)(\\d+)(\\w?)(\\s)", Pattern.CASE_INSENSITIVE);
@@ -874,9 +869,7 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	@NotNull
 	@Override
 	public String cleanTripHeadsign(@NotNull String tripHeadsign) {
-		if (Utils.isUppercaseOnly(tripHeadsign, true, true)) {
-			tripHeadsign = tripHeadsign.toLowerCase(Locale.ENGLISH);
-		}
+		tripHeadsign = CleanUtils.toLowerCaseUpperCaseWords(Locale.ENGLISH, tripHeadsign);
 		tripHeadsign = CleanUtils.keepToAndRemoveVia(tripHeadsign);
 		tripHeadsign = STARTS_WITH_RSN.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
 		tripHeadsign = ENDS_WITH_ONLY.matcher(tripHeadsign).replaceAll(StringUtils.EMPTY);
@@ -886,7 +879,6 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 		tripHeadsign = WATER_ST_TERMINAL_.matcher(tripHeadsign).replaceAll(WATER_ST_TERMINAL_REPLACEMENT);
 		tripHeadsign = CleanUtils.SAINT.matcher(tripHeadsign).replaceAll(CleanUtils.SAINT_REPLACEMENT);
 		tripHeadsign = CleanUtils.CLEAN_AND.matcher(tripHeadsign).replaceAll(CleanUtils.CLEAN_AND_REPLACEMENT);
-		tripHeadsign = CleanUtils.removePoints(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanStreetTypes(tripHeadsign);
 		return CleanUtils.cleanLabel(tripHeadsign);
 	}
@@ -938,10 +930,12 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public int getStopId(@NotNull GStop gStop) {
-		if (Utils.isDigitsOnly(gStop.getStopId())) {
-			return Integer.parseInt(gStop.getStopId());
+		//noinspection deprecation
+		final String stopId = gStop.getStopId();
+		if (Utils.isDigitsOnly(stopId)) {
+			return Integer.parseInt(stopId);
 		}
-		Matcher matcher = DIGITS.matcher(gStop.getStopId());
+		Matcher matcher = DIGITS.matcher(stopId);
 		if (matcher.find()) {
 			return Integer.parseInt(matcher.group());
 		}
@@ -951,10 +945,12 @@ public class HalifaxTransitBusAgencyTools extends DefaultAgencyTools {
 	@NotNull
 	@Override
 	public String getStopCode(@NotNull GStop gStop) {
-		if (Utils.isDigitsOnly(gStop.getStopId())) {
-			return gStop.getStopId(); // using stop ID as stop code ("GoTime" number)
+		//noinspection deprecation
+		final String stopId = gStop.getStopId();
+		if (Utils.isDigitsOnly(stopId)) {
+			return stopId; // using stop ID as stop code ("GoTime" number)
 		}
-		Matcher matcher = DIGITS.matcher(gStop.getStopId());
+		Matcher matcher = DIGITS.matcher(stopId);
 		if (matcher.find()) {
 			return matcher.group();
 		}
